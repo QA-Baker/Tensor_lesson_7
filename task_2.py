@@ -22,7 +22,33 @@
 # 1337*32*9 = 385056
 
 # Здесь пишем код
+from collections import Counter
 
+
+class PersonInfo:
+    def __init__(self, full_name, age, *departments):
+        self.full_name = full_name
+        self.age = age
+        self.departments = departments
+
+    def short_name(self):
+        # Извлекаем фамилию и первую букву имени
+        name, surname = self.full_name.split()
+        return f"{surname} {name[0]}."
+
+    def path_deps(self):
+        # Объединяем подразделения через " --> "
+        return " --> ".join(self.departments)
+
+    def new_salary(self):
+        # Считаем все символы из названий подразделений
+        all_letters = "".join(self.departments)
+        # Находим три наиболее часто встречающиеся буквы
+        most_common = Counter(all_letters).most_common(3)
+        # Суммируем их частоты
+        total_frequency = sum(freq for _, freq in most_common)
+        # Вычисляем новую зарплату
+        return 1337 * self.age * total_frequency
 # Ниже НИЧЕГО НЕ НАДО ИЗМЕНЯТЬ
 
 
