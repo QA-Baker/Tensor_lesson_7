@@ -9,6 +9,33 @@
 # RomanNums('CMXCIX').is_palindrome() --> True
 
 # Здесь пишем код
+class RomanNums:
+    roman_to_arabic_map = {
+        'I': 1, 'V': 5, 'X': 10, 'L': 50, 'C': 100,
+        'D': 500, 'M': 1000
+    }
+
+    def __init__(self, roman):
+        self.roman = roman
+
+    def from_roman(self):
+        """Переводит римское число в арабское."""
+        total = 0
+        prev_value = 0
+
+        for char in reversed(self.roman):
+            current_value = self.roman_to_arabic_map[char]
+            if current_value < prev_value:
+                total -= current_value
+            else:
+                total += current_value
+            prev_value = current_value
+        return total
+
+    def is_palindrome(self):
+        """Проверяет, является ли арабское число палиндромом."""
+        arabic_num = self.from_roman()
+        return str(arabic_num) == str(arabic_num)[::-1]
 
 # Ниже НИЧЕГО НЕ НАДО ИЗМЕНЯТЬ
 

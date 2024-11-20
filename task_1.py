@@ -10,7 +10,24 @@
 # Segment((-2, -3), (-4, -5)).y_axis_intersection() --> False
 
 # Здесь пишем код
+import math
 
+
+class Segment:
+    def __init__(self, point1, point2):
+        self.x1, self.y1 = point1
+        self.x2, self.y2 = point2
+
+    def length(self):
+        return round(math.sqrt((self.x2 - self.x1) ** 2 + (self.y2 - self.y1) ** 2), 2)
+
+    def x_axis_intersection(self):
+        # Проверяем, если один конец выше оси x, а другой ниже, или если один из концов лежит на оси x
+        return self.y1 * self.y2 <= 0
+
+    def y_axis_intersection(self):
+        # Проверяем, если один конец слева от оси y, а другой справа, или если один из концов лежит на оси y
+        return self.x1 * self.x2 <= 0
 # Ниже НИЧЕГО НЕ НАДО ИЗМЕНЯТЬ
 
 
